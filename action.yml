@@ -1,15 +1,18 @@
-name: 'Custom Github Action'
-description: 'A Github Action that takes an input and returns the square of the number'
+name: 'Upload a ModDB release asset'
+description: 'Upload a release asset to ModDB'
+author: 'Tosox'
 inputs:
-  num:
-    description: 'Enter a number'
+  moddb_username:
+    description: 'ModDB username'
     required: true
-    default: 1
-outputs:
-  num_squared:
-    description: 'Square of the input'
-    # need to specify the extra `value` field for `composite` actions
-    value: ${{ steps.get-square.outputs.num_squared }}
+  moddb_password:
+    description: 'ModDB password'
+    required: true
+#outputs:
+#  num_squared:
+#    description: 'Square of the input'
+#    # Need to specify the extra `value` field for `composite` actions
+#    value: ${{ steps.get-square.outputs.num_squared }}
 runs:
   using: 'composite'
   steps:
@@ -19,12 +22,10 @@ runs:
         python-version: '3.10'
     - name: Install Dependencies
       run: pip install -r requirements.txt
-      shell: bash
-    - name: Pass Inputs to Shell
-      run: |
-          echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
-      shell: bash
-    - name: Fetch the number's square
-      id: get-square
-      run: python src/get_num_square.py
-      shell: bash
+    #- name: Pass Inputs to Shell
+      #run: |
+      #    echo "MODDB_USERNAME=${{ inputs.moddb_username }}" >> $GITHUB_ENV
+      #    echo "MODDB_PASSWORD=${{ inputs.moddb_password }}" >> $GITHUB_ENV
+    - name: Upload ModDB release asset
+      id: upload-moddb-release
+      run: python src/upload_release.py

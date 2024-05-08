@@ -7,8 +7,8 @@ def set_output(name, value):
 
 def assert_required(var, msg):
     if not var:
-        with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:
-            print(f"::error title=Error::{msg}", file=f)
+        #with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:
+        print(f"::error title=Error::{msg}")
         exit(1)
 
 def main():

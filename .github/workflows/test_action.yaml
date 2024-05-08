@@ -1,16 +1,19 @@
 name: 'Test Action'
-on: [push]
+
+on:
+  workflow_dispatch:
 
 jobs:
-  upload_test_asset:
+  test_action:
     runs-on: 'ubuntu-latest'
-    name: 'Upload test asset'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: 'Upload test asset'
-        uses: ./ # Uses an action in the root directory
-        # or use a released Github Action
+        uses: ./
         env:
-          MODDB_USERNAME: ${{ secrets.MODDB_USERNAME }}
+          #MODDB_USERNAME: ${{ secrets.MODDB_USERNAME }}
           MODDB_PASSWORD: ${{ secrets.MODDB_PASSWORD }}
+        with:
+          moddb_mod_url: 'https://moddb.com/mods/stalker-anomaly/'
+

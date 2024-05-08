@@ -5,14 +5,22 @@ def set_output(name, value):
     with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:
         print(f"{name}={value}", file=f)
 
+def assert_required(var):
+    if not var:
+        with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:
+            print(f"::warning gay", file=f)
+        exit(1)
+
 def main():
     username = os.getenv("MODDB_USERNAME")
+    assert_required(username)
+
     password = os.getenv("MODDB_PASSWORD")
 
     try:
         moddb.login(username, password)
     except ValueError as e:
-        print(e)
+        print(f"Login failed for user {username}")
         exit(1)
 
     print(f"Successfully logged-in as {username}")

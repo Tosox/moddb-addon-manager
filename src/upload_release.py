@@ -12,13 +12,14 @@ def assert_required(var, msg):
 
 def main():
     username = os.getenv("MODDB_USERNAME")
-    assert_required(username, "Missing required input 'MODDB_USERNAME'")
+    assert_required(username, "Missing required input env 'MODDB_USERNAME'")
 
     password = os.getenv("MODDB_PASSWORD")
+    assert_required(password, "Missing required input env 'MODDB_PASSWORD'")
 
     try:
         moddb.login(username, password)
-    except ValueError as e:
+    except ValueError:
         print(f"Login failed for user {username}")
         exit(1)
 

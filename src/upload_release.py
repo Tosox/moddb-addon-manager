@@ -10,10 +10,10 @@ def main():
     password = os.getenv("MODDB_PASSWORD")
 
     try:
-        moddb.login(username, password + "123")
+        moddb.login(username, password)
     except ValueError as e:
         print(e)
-        exit(-1)
+        exit(1)
 
     print(f"Successfully logged-in as {username}")
 

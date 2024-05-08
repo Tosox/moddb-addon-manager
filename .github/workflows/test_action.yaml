@@ -11,6 +11,6 @@ jobs:
       - name: 'Upload test asset'
         uses: ./ # Uses an action in the root directory
         # or use a released Github Action
-      - env:
+        env:
           MODDB_USERNAME: ${{ secrets.MODDB_USERNAME }}
           MODDB_PASSWORD: ${{ secrets.MODDB_PASSWORD }}

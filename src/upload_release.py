@@ -5,10 +5,10 @@ def set_output(name, value):
     with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:
         print(f"{name}={value}", file=f)
 
-def assert_required(var):
+def assert_required(var, msg):
     if not var:
-        #with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:
-        print(f"Warning: gay")
+        with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:
+            print(f"::error::hi", file=f)
         exit(1)
 
 def main():

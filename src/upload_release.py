@@ -13,7 +13,7 @@ def assert_required(var, msg):
 
 def main():
     username = os.getenv("MODDB_USERNAME")
-    assert_required(username)
+    assert_required(username, "Missing required input 'MODDB_USERNAME'")
 
     password = os.getenv("MODDB_PASSWORD")
 

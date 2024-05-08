@@ -17,15 +17,18 @@ runs:
   using: 'composite'
   steps:
     - name: Install Python
+      shell: bash
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
     - name: Install Dependencies
       run: pip install -r requirements.txt
     #- name: Pass Inputs to Shell
+    #  shell: bash
       #run: |
       #    echo "MODDB_USERNAME=${{ inputs.moddb_username }}" >> $GITHUB_ENV
       #    echo "MODDB_PASSWORD=${{ inputs.moddb_password }}" >> $GITHUB_ENV
     - name: Upload ModDB release asset
+      shell: bash
       id: upload-moddb-release
       run: python src/upload_release.py

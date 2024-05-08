@@ -3,10 +3,10 @@ description: 'Upload a release asset to ModDB'
 author: 'Tosox'
 inputs:
   moddb_username:
-    description: 'ModDB username'
+    description: 'ModDB account username'
     required: true
   moddb_password:
-    description: 'ModDB password'
+    description: 'ModDB account password'
     required: true
 #outputs:
 #  num_squared:
@@ -23,11 +23,10 @@ runs:
     - name: Install Dependencies
       shell: bash
       run: pip install -r requirements.txt
-    #- name: Pass Inputs to Shell
-    #  shell: bash
-      #run: |
-      #    echo "MODDB_USERNAME=${{ inputs.moddb_username }}" >> $GITHUB_ENV
-      #    echo "MODDB_PASSWORD=${{ inputs.moddb_password }}" >> $GITHUB_ENV
+    - name: Pass Inputs to Shell
+      shell: bash
+      run: |
+          echo "MODDB_MOD_URL=${{ inputs.moddb_mod_url }}" >> $GITHUB_ENV
     - name: Upload ModDB release asset
       shell: bash
       id: upload-moddb-release

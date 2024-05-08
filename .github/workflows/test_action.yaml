@@ -1,19 +1,16 @@
-name: Test Action
+name: 'Test Action'
 on: [push]
 
 jobs:
-  get-num-square:
-    runs-on: ubuntu-latest
-    name: Return's the number square
+  upload_test_asset:
+    runs-on: 'ubuntu-latest'
+    name: 'Upload test asset'
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Fetch num squared
-        id: get_square
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: 'Upload test asset'
         uses: ./ # Uses an action in the root directory
         # or use a released Github Action
-        # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
-        with:
-          num: 11
-      - name: Print the square
-        run: echo "${{ steps.get_square.outputs.num_squared }}"
+      - env:
+          MODDB_USERNAME: ${{ secrets.MODDB_USERNAME }}
+          MODDB_PASSWORD: ${{ secrets.MODDB_PASSWORD }}

@@ -12,7 +12,7 @@ jobs:
       - name: 'Upload test asset'
         uses: ./
         env:
-          MODDB_USERNAME: ${{ secrets.MODDB_USERNAME }}
+          #MODDB_USERNAME: ${{ secrets.MODDB_USERNAME }}
           MODDB_PASSWORD: ${{ secrets.MODDB_PASSWORD }}
         with:
           moddb_mod_url: 'https://moddb.com/mods/stalker-anomaly/'

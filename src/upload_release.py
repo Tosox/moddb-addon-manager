@@ -24,8 +24,6 @@ def main():
         print(f"Login failed for user {username}")
         exit(1)
 
-    print("test")
-
     print(f"Successfully logged-in as {username}")
 
 if __name__ == '__main__':

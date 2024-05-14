@@ -1,6 +1,5 @@
 import os
 import moddb
-import requests
 
 def set_output(name, value):
     with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:

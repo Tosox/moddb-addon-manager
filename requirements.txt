@@ -1,2 +1,2 @@
-moddb
+moddb @ git+https://github.com/Tosox/moddb@develop
 pytest

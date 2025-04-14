@@ -54,7 +54,7 @@ runs:
 
     - name: Run moddb script
       shell: bash
-      run: python moddb_cli.py
+      run: python src/moddb_cli.py
       env:
         MODE: ${{ inputs.mode }}
         MODDB_USERNAME: ${{ inputs.moddb_username }}

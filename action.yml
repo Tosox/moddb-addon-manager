@@ -1,33 +1,71 @@
-name: 'Upload a ModDB release asset'
-description: 'Upload a release asset to ModDB'
-author: 'Tosox'
+name: ModDB Addon Upload/Update
+description: Uploads or updates an addon on ModDB using the moddb Python library
+author: Tosox
+
 inputs:
+  mode:
+    description: "upload or update"
+    required: true
   moddb_username:
-    description: 'ModDB account username'
     required: true
   moddb_password:
-    description: 'ModDB account password'
     required: true
-#outputs:
-#  num_squared:
-#    description: 'Square of the input'
-#    # Need to specify the extra `value` field for `composite` actions
-#    value: ${{ steps.get-square.outputs.num_squared }}
+  mod_url:
+    required: false
+  addon_url:
+    required: false
+  addon_path:
+    required: false
+  thumbnail_path:
+    required: false
+  name:
+    required: false
+  summary:
+    required: false
+  description:
+    required: false
+  category:
+    required: false
+  platforms:
+    required: false
+  credits:
+    required: false
+  tags:
+    required: false
+  licence:
+    required: false
+
+outputs:
+  result:
+    description: "Whether the addon was uploaded or updated"
+
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - name: Install Python
-      uses: actions/setup-python@v4
+    - uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
-    - name: Install Dependencies
+        python-version: '3.11'
+
+    - name: Install Python requirements
       shell: bash
       run: pip install -r requirements.txt
-    - name: Pass Inputs to Shell
+
+    - name: Run moddb script
       shell: bash
-      run: |
-          echo "MODDB_MOD_URL=${{ inputs.moddb_mod_url }}" >> $GITHUB_ENV
-    - name: Upload ModDB release asset
-      shell: bash
-      id: upload-moddb-release
-      run: python src/upload_release.py
+      run: python moddb_cli.py
+      env:
+        MODE: ${{ inputs.mode }}
+        MODDB_USERNAME: ${{ inputs.moddb_username }}
+        MODDB_PASSWORD: ${{ inputs.moddb_password }}
+        MOD_URL: ${{ inputs.mod_url }}
+        ADDON_URL: ${{ inputs.addon_url }}
+        ADDON_PATH: ${{ inputs.addon_path }}
+        THUMBNAIL_PATH: ${{ inputs.thumbnail_path }}
+        NAME: ${{ inputs.name }}
+        SUMMARY: ${{ inputs.summary }}
+        DESCRIPTION: ${{ inputs.description }}
+        CATEGORY: ${{ inputs.category }}
+        PLATFORMS: ${{ inputs.platforms }}
+        CREDITS: ${{ inputs.credits }}
+        TAGS: ${{ inputs.tags }}
+        LICENCE: ${{ inputs.licence }}

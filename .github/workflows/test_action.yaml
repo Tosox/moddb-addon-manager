@@ -9,11 +9,23 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: 'Upload test asset'
+
+      - name: Upload ModDB Addon
         uses: ./
         env:
-          MODDB_USERNAME: ${{ secrets.MODDB_USERNAME }}
-          MODDB_PASSWORD: ${{ secrets.MODDB_PASSWORD }}
-        with:
-          moddb_mod_url: 'https://moddb.com/mods/stalker-anomaly/'
+          MODE: upload
+          MODDB_USERNAME: ${{ secrets.MODDB_USER }}
+          MODDB_PASSWORD: ${{ secrets.MODDB_PASS }}
+          MOD_URL: https://www.moddb.com/mods/my-mod
+          ADDON_PATH: out/addon.zip
+          THUMBNAIL_PATH: out/preview.jpg
+          NAME: My Addon
+          SUMMARY: Short summary
+          DESCRIPTION: Long HTML description
+          CATEGORY: player_skin
+          PLATFORMS: windows,steamdeck
+          TAGS: patch,release
+          LICENCE: mit
 
+      - name: Log result
+        run: echo "Result was ${{ steps.upload.outputs.result }}"

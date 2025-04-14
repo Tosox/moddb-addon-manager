@@ -32,7 +32,7 @@ inputs:
     required: false
   tags:
     required: false
-  licence:
+  license:
     required: false
   file_url:
     required: false
@@ -70,5 +70,5 @@ runs:
         PLATFORMS: ${{ inputs.platforms }}
         CREDITS: ${{ inputs.credits }}
         TAGS: ${{ inputs.tags }}
-        LICENCE: ${{ inputs.licence }}
+        LICENSE: ${{ inputs.license }}
         FILE_URL: ${{ inputs.file_url }}

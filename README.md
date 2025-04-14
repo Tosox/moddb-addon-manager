@@ -27,7 +27,7 @@ It logs in to your ModDB account, uploads a .zip addon file with a thumbnail, an
 | `platforms`      | ❌       | Comma-separated platform list (e.g. `windows,linux`)         |
 | `credits`        | ❌       | Optional credit line                                         |
 | `tags`           | ❌       | Comma-separated tags (e.g. `patch,release`)                  |
-| `licence`        | ❌       | Licence enum (e.g. `mit`, `proprietary`, `gpl`)              |
+| `license`        | ❌       | Licence enum (e.g. `mit`, `proprietary`, `gpl`)              |
 | `file_url`       | ❌       | Only useable in `update` mode                                |
 
 ## 🧪 Example Usage
@@ -52,7 +52,7 @@ jobs:
           category: player_skin
           platforms: windows,linux
           tags: patch,release
-          licence: mit
+          license: mit
 ```
 
 ## 📤 Outputs
@@ -73,7 +73,7 @@ maps, skins, models, audio, graphics, hud, gui, effects_gfx, ...
 windows, linux, mac, ps5, switch, steamdeck, web, android, ...
 ```
 
-`licence` (Licence)
+`license` (Licence)
 ```
 mit, gpl, lgpl, proprietary, commercial, public_domain, ...
 ```

@@ -64,7 +64,7 @@ def main():
     platforms = os.getenv("PLATFORMS")
     credits = os.getenv("CREDITS")
     tags = os.getenv("TAGS")
-    licence = os.getenv("LICENCE")
+    license = os.getenv("LICENSE")
     file_url = os.getenv("FILE_URL")
 
     try:
@@ -76,7 +76,7 @@ def main():
     print(f"✅ Successfully logged in as {username}")
 
     category_enum = parse_enum(AddonCategory, category)
-    licence_enum = parse_enum(Licence, licence, Licence.proprietary)
+    license_enum = parse_enum(Licence, license, Licence.proprietary)
     platform_list = parse_platforms(platforms)
     tag_list = parse_tags(tags)
 
@@ -109,7 +109,7 @@ def main():
             summary=summary,
             description=description,
             platforms=platform_list,
-            licence=licence_enum,
+            licence=license_enum,
             credits=credits or "",
             tags=tag_list
         )
@@ -136,7 +136,7 @@ def main():
             summary=summary,
             description=description,
             platforms=platform_list,
-            licence=licence_enum,
+            licence=license_enum,
             credits=credits,
             tags=tag_list,
             url=file_url

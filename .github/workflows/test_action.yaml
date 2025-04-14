@@ -11,21 +11,22 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Upload ModDB Addon
+        id: upload
         uses: ./
-        env:
-          MODE: upload
-          MODDB_USERNAME: ${{ secrets.MODDB_USER }}
-          MODDB_PASSWORD: ${{ secrets.MODDB_PASS }}
-          MOD_URL: https://www.moddb.com/mods/my-mod
-          ADDON_PATH: out/addon.zip
-          THUMBNAIL_PATH: out/preview.jpg
-          NAME: My Addon
-          SUMMARY: Short summary
-          DESCRIPTION: Long HTML description
-          CATEGORY: player_skin
-          PLATFORMS: windows,steamdeck
-          TAGS: patch,release
-          LICENCE: mit
+        with:
+          mode: upload
+          moddb_username: ${{ secrets.MODDB_USER }}
+          moddb_password: ${{ secrets.MODDB_PASS }}
+          mod_url: https://www.moddb.com/mods/my-mod
+          addon_path: out/addon.zip
+          thumbnail_path: out/preview.jpg
+          name: My Addon
+          summary: Short summary
+          description: Long HTML description
+          category: player_skin
+          platforms: windows,linux
+          tags: patch,release,test
+          license: mit
 
       - name: Log result
         run: echo "Result was ${{ steps.upload.outputs.result }}"

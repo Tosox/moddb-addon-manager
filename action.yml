@@ -34,6 +34,8 @@ inputs:
     required: false
   licence:
     required: false
+  file_url:
+    required: false
 
 outputs:
   result:
@@ -69,3 +71,4 @@ runs:
         CREDITS: ${{ inputs.credits }}
         TAGS: ${{ inputs.tags }}
         LICENCE: ${{ inputs.licence }}
+        FILE_URL: ${{ inputs.file_url }}

@@ -65,9 +65,10 @@ def main():
     credits = os.getenv("CREDITS")
     tags = os.getenv("TAGS")
     licence = os.getenv("LICENCE")
+    file_url = os.getenv("FILE_URL")
 
     try:
-        moddb.login(username, password)
+        client = moddb.Client(username, password)
     except ValueError:
         print(f"::error title=Authentication Failed::Login failed for user '{username}'")
         sys.exit(1)
@@ -91,20 +92,26 @@ def main():
         ]:
             assert_required(var, f"Missing required input for upload: {msg}")
 
-        mod = moddb.Mod(moddb.get_page(mod_url))
+        for var, msg in [
+            (addon_url, "ADDON_URL"),
+            (file_url, "FILE_URL"),
+        ]:
+            if var:
+                print(f"::warning title=Optional input::{msg} is not required for upload mode. Ignoring.")
 
-        moddb.upload_addon(
+        mod = moddb.Mod(moddb.get_page(mod_url))
+        client.upload_addon(
             mod=mod,
             addon_path=addon_path,
             thumbnail_path=thumbnail_path,
+            category=category_enum,
             name=name,
             summary=summary,
             description=description,
-            category=category_enum,
             platforms=platform_list,
-            credits=credits,
-            tags=tag_list,
             licence=licence_enum,
+            credits=credits or "",
+            tags=tag_list
         )
 
         print("✅ Addon uploaded successfully")
@@ -113,20 +120,26 @@ def main():
     elif mode == "update":
         assert_required(addon_url, "Missing required input: ADDON_URL")
 
-        addon = moddb.Addon(moddb.get_page(addon_url))
+        for var, msg in [
+            (mod_url, "MOD_URL")
+        ]:
+            if var:
+                print(f"::warning title=Optional input::{msg} is not required for update mode. Ignoring.")
 
-        moddb.update_addon(
+        addon = moddb.Addon(moddb.get_page(addon_url))
+        client.update_addon(
             addon=addon,
             addon_path=addon_path,
             thumbnail_path=thumbnail_path,
+            category=category_enum,
             name=name,
             summary=summary,
             description=description,
-            category=category_enum,
             platforms=platform_list,
+            licence=licence_enum,
             credits=credits,
             tags=tag_list,
-            licence=licence_enum,
+            url=file_url
         )
 
         print("✅ Addon updated successfully")
